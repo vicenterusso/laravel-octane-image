@@ -43,5 +43,4 @@ jobs:
         push: true
         tags: |
           ${{ secrets.DOCKER_HUB_USERNAME }}/laravel-octane:${{ steps.sha.outputs.shortsha }}
-          ${{ secrets.DOCKER_HUB_USERNAME }}/laravel-octane:build-${{ env.BUILD_NUMBER }}
           ${{ secrets.DOCKER_HUB_USERNAME }}/laravel-octane:${{ steps.version.outputs.builddate }}
