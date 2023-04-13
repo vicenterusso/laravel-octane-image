@@ -28,6 +28,11 @@ jobs:
       run: |
           echo "builddate=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
 
+    - name: "Set short SHA"
+      id: sha
+      run: |
+          echo "shortsha=$(echo ${GITHUB_SHA::7})" >> $GITHUB_OUTPUT
+
     - name: Build and push Docker image
       env:
         BUILD_DATE: $GITHUB_OUTPUT
@@ -37,5 +42,6 @@ jobs:
         context: .
         push: true
         tags: |
+          ${{ secrets.DOCKER_HUB_USERNAME }}/laravel-octane:${{ steps.sha.outputs.shortsha }}
           ${{ secrets.DOCKER_HUB_USERNAME }}/laravel-octane:build-${{ env.BUILD_NUMBER }}
           ${{ secrets.DOCKER_HUB_USERNAME }}/laravel-octane:${{ steps.version.outputs.builddate }}
