@@ -33,3 +33,20 @@ docker run -it --name <your-container-name> -v $(pwd):/app <your-image-name>
 ```
 
 Replace `<your-container-name>` and `<your-image-name>` with the desired name for your Docker container. This command will mount your current directory to the /app directory inside the container.
+
+
+#### Docker Compose Example Usage
+
+```yaml
+version: '3'
+services:           
+    octane:
+        image: vicenterusso/laravel-octane:<tag>
+        restart: always
+        working_dir: /var/www/
+        command: [ "php", "artisan", "octane:start", "--host=0.0.0.0", "--port=8000" ]
+        ports:
+            - 8000:8000
+        volumes:
+            - "./web:/var/www"
+```
