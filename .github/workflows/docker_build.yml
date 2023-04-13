@@ -23,9 +23,10 @@ jobs:
         username: ${{ secrets.DOCKER_HUB_USERNAME }}
         password: ${{ secrets.DOCKER_HUB_TOKEN }}
 
-    - name: Get current date
-      id: current_date
-      run: echo "{name}=date::$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
+    - name: "Set current date as env variable"
+      id: version
+      run: |
+          echo "builddate=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
 
     - name: Build and push Docker image
       env:
@@ -37,4 +38,4 @@ jobs:
         push: true
         tags: |
           ${{ secrets.DOCKER_HUB_USERNAME }}/laravel-octane:build-${{ env.BUILD_NUMBER }}
-          ${{ secrets.DOCKER_HUB_USERNAME }}/laravel-octane:${{ env.BUILD_DATE }}
+          ${{ secrets.DOCKER_HUB_USERNAME }}/laravel-octane:${{ steps.version.outputs.builddate }}
