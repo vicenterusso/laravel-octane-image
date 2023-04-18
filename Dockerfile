@@ -1,3 +1,10 @@
+# Dockerfile for Dockerhub: vicenterusso/laravel-octane 
+# 
+# Laravel Octane Ready Image
+#
+# Author: Vicente Russo <vicente.russo@gmail.com>
+# GitHub: https://github.com/vicenterusso/laravel-octane-image
+
 FROM ghcr.io/getimages/php:8.2.0-cli-bullseye
 
 # Install system dependencies
